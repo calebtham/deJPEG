@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Global Styles
+   ========================================================================== */
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body,
+.modal-body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.main {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-height: 85vh;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+
+.collapsing {
+  transform: translateY(30px);
+  opacity: 0%;
+  transition: all 0.5s;
+}
+
+.collapse.show {
+  margin-top: 30px;
+  transform: translateY(-30px);
+  opacity: 100%;
+  transition: all 0.5s;
+}
+
+.navbar .collapsing,
+.navbar .collapse.show {
+  margin-top: 0px;
+  transform: none;
+}
+
+/* ==========================================================================
+   Element styles
+   ========================================================================== */
+
+.fs-7 {
+  font-size: 9pt;
+}
+
+.img-fluid {
+  width: 100%;
+}
+
+.back {
+  position: fixed;
+  left: 50px;
+  top: 100px;
+}
+
+.btn-clear {
+  background: none;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  opacity: 70%;
+  transition: opacity 0.2s;
+}
+
+.btn-clear:hover {
+  opacity: 100%;
+  transition: opacity 0.2s;
+}
+
+.tooltip-right,
+.tooltip-left {
+  font-size: smaller;
+}
+
+.toolbar .tooltip-hover {
+  opacity: 0;
+  transition: opacity 0.2s;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.toolbar:hover .tooltip-hover {
+  opacity: 1;
+}
+
+.tooltip-hover {
+  cursor: pointer;
+}
+
+.tooltip-right {
+  position: absolute;
+  bottom: 3px;
+  right: 12px;
+}
+
+/* ==========================================================================
+   Small screen
+   ========================================================================== */
+@media only screen and (max-width: 991px) {
+  .back {
+    position: absolute;
+    left: 10px;
+    top: 70px;
+  }
+
+  .tooltip-right,
+  .tooltip-left {
+    font-size: xx-small;
+  }
+}
