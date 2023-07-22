@@ -8,7 +8,7 @@ We developed a system that can reverse the degradation of quality of JPEG compre
 
 Our detector CNN model achieves near state-of-the-art accuracy in the task, despite using a smaller and simpler architecture compared to existing solutions. 
 
-Our restorer GAN model was able to outperform a previous state-of-the-art method for JPEG artifact removal as we employed NoGAN training and introduced a novel perceptual loss function, which incorporates information from multiple scales using MS-SSIM and considers deep semantic features extracted from a deep VGG-19 network.
+Our restorer GAN model was able to outperform a previous state-of-the-art method for JPEG artifact removal as we employed NoGAN training and introduced a novel perceptual loss function, which incorporates information from multiple scales using MS-SSIM and considers deep semantic features extracted from a pretrained VGG-19 network.
 
 Read the dissertation [here](ai-research/dissertation/dissertation.pdf).
 
