@@ -2,6 +2,14 @@
 
 Using **de**ep learning to **de**tect JPEG compression and **de**-artifact an image. 
 
+##### Table of Contents  
+[1. About](#1-about)  
+[2. Setup Instructions](#2-setup-instructions)  
+[3. Files Included](#3-files-included)  
+[4. Dataset](#4-dataset)    
+
+## 1. About
+
 This is a project for my Computer Science (MEng) dissertation at the University of Warwick, entitled, "JPEG compression detection and restoration". 
 
 We developed a system that can reverse the degradation of quality of JPEG compressed images. In particular, the system can detect whether an image has undergone JPEG compression using solely pixel information. If compression is detected, a JPEG artifact removal process is invoked. 
@@ -10,11 +18,15 @@ Our detector CNN model achieves near state-of-the-art accuracy in the task, desp
 
 Our restorer GAN model was able to outperform a previous state-of-the-art method for JPEG artifact removal as we employed NoGAN training and introduced a novel perceptual loss function, which incorporates information from multiple scales using MS-SSIM and considers deep semantic features extracted from a pretrained VGG-19 network.
 
+The models can be used using the demo website part of this repo. See section 1 for setup instructions.
+
 Read the dissertation [here](ai-research/dissertation/dissertation.pdf).
 
 **Restored image examples**
 
 ![Examples](ai-research/dissertation/examples.png)
+
+## 1.1 Models
 
 **GAN for restoration**
 
@@ -28,12 +40,28 @@ Generator architecture:
 
 ![detector](ai-research/dissertation/detector.png)
 
-## 1. Setup Instructions
+## 1.2 Demo website
+
+The demo website can be setup following instructions in Section 1. Once setup, you should be able to access the website and use the models. It looks as follows: 
+
+Submitting an image: 
+![Front Page](ai-research/dissertation/frontpage.png)
+
+After submitting an image: 
+![Restored Page](ai-research/dissertation/restorepage.png)
+
+Results information: 
+![Restored Page](ai-research/dissertation/expandpage.png)
+
+Fullscreen result: 
+![Fullscreen 1](ai-research/dissertation/fullscreen.png)
+
+## 2. Setup Instructions
 
 The frontend and backend should each be setup/run in separate terminal windows. Note that these instructions are designed for Linux/MacOS.
 
-### 1.1 Frontend
-#### 1.1.1 Setup
+### 2.1 Frontend
+#### 2.1.1 Setup
 Prerequisites: Node.js is installed on your machine.
 1. Go to `./client` directory
 2. Install Node dependencies with:
@@ -41,7 +69,7 @@ Prerequisites: Node.js is installed on your machine.
     npm install
     ```
 
-#### 1.1.2 Run
+#### 2.1.2 Run
 1. Ensure you are in the `./client` directory.
 2. Start React app with: 
     ```bash
@@ -50,8 +78,8 @@ Prerequisites: Node.js is installed on your machine.
 
 Kill the app by closing your terminal window.
 
-### 1.2 Backend
-#### 1.2.1 Setup
+### 2.2 Backend
+#### 2.2.1 Setup
 Prerequisites: Python 3 is installed on your machine.
 1. Go to `./server` directory
 2. Install Virtualenv using: (Skip this if you already have Virtualenv)
@@ -75,7 +103,7 @@ Prerequisites: Python 3 is installed on your machine.
     pip install -r requirements.txt
     ```
 
-#### 1.2.2 Run
+#### 2.2.2 Run
 1. Ensure you are in the `./server` directory.
 2. Activate the virtual environment with: 
     ```bash
@@ -96,7 +124,7 @@ Prerequisites: Python 3 is installed on your machine.
 
 Kill the server by closing your terminal window. 
 
-### 1.3 Train own models (optional)
+### 2.3 Train own models (optional)
 To use the dataset in Google Colab, you must first create a shortcut to the dataset folder in your own Google Drive (see Section 3 for more information on the dataset).
 1. Open the dataset folder link: https://drive.google.com/drive/folders/1hP3Nbg-x6DOwkWMLgNvOtNUT16AuaMd-?usp=share_link
 2. In the `dataset` folder dropdown, select "Add shortcut to Drive". Select your desired location to add the shortcut.
@@ -115,7 +143,7 @@ Note: The notebooks were developed with a Google Colab Pro subscription, so "Hig
 
 Note: The experiments in the report for training the restorer were limited to 80,000 steps (100 epochs) due to time constraints (and a desire to conduct numerous experiments). However, better results can still be obtained by training for longer - a welcome bonus!
 
-## 2. Files Included
+## 3. Files Included
  As agreed with the project supervisor (Victor Sanchez), we include the website code and the code to train the final models.
 
 * The Jupyter notebooks to train the proposed models can be found in the `./ai-research` folder. We have also included the notebooks that obtain and preprocess our dataset to show how we achieved our system requirement **M1**.
@@ -130,12 +158,12 @@ Note: The experiments in the report for training the restorer were limited to 80
 
 * Additionally, some demo images taken from our dataset are included in the `./demo` folder.
 
-### 2.1 Models Included
+### 3.1 Models Included
 
-#### 2.1.1 Pretrained detector 
+#### 3.1.1 Pretrained detector 
 We include our proposed CNN detector (C_Tiny architecture) trained on 20% of the images in the dataset, each compressed with single quality factors 10, 30, 50, 70, 90, and double quality factors (50, 10), (50, 30), (50, 50), (50, 70), (50, 90)
 
-#### 2.1.2 Pretrained restorers
+#### 3.1.2 Pretrained restorers
 We include multiple restorers for experimentation, including our proposed model. All are trained on 80% of images in the dataset, which are compressed with an effective QF=10.
 * **Small-PostGAN**: Our proposed restorer, with G_small architecture and our novel loss function (defined in our report), trained with a NoGAN method.
 * **Small-PreGAN**: A NoGAN trained G_small model prior to training with the discriminator. This means the model is essentially a stand-alone generative CNN model.
@@ -143,7 +171,7 @@ We include multiple restorers for experimentation, including our proposed model.
 * **Zhao-PostGAN**: Similar to Small-PostGAN, but with G_Zhao architecture instead.
 * **Zhao-Original**: The model proposed by Zhao et al., although slightly modified to accept RGB images.
 
-### 2.2 Demo Images Included
+### 3.2 Demo Images Included
 We include images compressed with different QFs to test the effectiveness of the models. The following folders can be found in `./demo`:
 * `/uncompressed`: Images that are uncompressed. 
     * The detector is able to effectively detect this. Try "force restore" on these images to see why it is not favourable to apply restoration on uncompressed images.
@@ -161,7 +189,7 @@ Note: Notice how some images are resaved as PNG files, showing how our models do
 
 Note: Notice how the images are of various sizes, showing how our models can accept any image size.
 
-## 3. Dataset
+## 4. Dataset
 The dataset for training the models is too large to be included in this submission. It is stored in Google Drive and a link is below. Please contact if you have any issues with access. See Section 1.3 to see how to setup the dataset for your own use.
 
 Link: https://drive.google.com/drive/folders/1hP3Nbg-x6DOwkWMLgNvOtNUT16AuaMd-?usp=share_link
@@ -170,7 +198,7 @@ Note: This does not include all data that was used throughout the project, as so
 
 Note: You will notice that "uncompressed" images are actually JPEG files. This is because we make an assumption that JPEG images compressed with QF=100 and subsampling=0 are visually indistinguishable to uncompressed images (we compress the uncompressed images with `img.save('image.jpg', quality=100, subsampling=0)` using PIL in Python). This allowed us to compare our proposed model to an existing solution, which uses quantization tables as an input.
 
-### 3.1 Dataset organization
+### 4.1 Dataset organization
 The dataset folder has multiple subdirectories, each of which may have multiple files. They are as follows: (some files may be missing, as explained above)
 
 `/dataset`
