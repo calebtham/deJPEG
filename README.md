@@ -42,7 +42,7 @@ Generator architecture:
 
 ## 1.2 Demo website
 
-The demo website can be setup following instructions in Section 1. Once setup, you should be able to access the website and use the models. It looks as follows: 
+There is a demo website to showcase the models. It uses a React frontend and Flask beackend. The website can be setup following instructions in Section 1. Once setup, you should be able to access the website and use the models. It looks as follows: 
 
 Submitting an image: 
 ![Front Page](ai-research/dissertation/frontpage.png)
